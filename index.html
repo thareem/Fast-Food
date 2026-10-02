@@ -435,61 +435,103 @@
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
         }
-        /* Mobile Responsiveness Code */
-@media screen and maximum-width: 768px {
-    
-    /* Navigation Bar Adjustments */
-    header, navbar {
-        flex-direction: column;
-        padding: 10px;
+ /* Clean Mobile Responsiveness Code */
+@media screen and (max-width: 768px) {
+
+    /* Header & Logo Alignment */
+    header, nav, .navbar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 10px 5px !important;
+        width: 100% !important;
     }
 
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-        padding: 0;
+    /* Fix overlapping text in Menu Links */
+    nav ul, .nav-links {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 8px 12px !important; /* Proper spacing between items */
+        padding: 0 !important;
+        margin: 8px 0 0 0 !important;
+        width: 100% !important;
     }
 
-    /* Hero Section & Video Adjustment */
+    nav ul li, .nav-links li {
+        display: inline-block !important;
+        font-size: 12px !important;
+        white-space: nowrap !important; /* Prevents awkward text wrapping */
+    }
+
+    nav ul li a, .nav-links li a {
+        font-size: 13px !important;
+        padding: 2px 4px !important;
+    }
+
+    /* Logo Size Adjustment */
+    .logo, header h1, header h2 {
+        font-size: 18px !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+        margin: 0 !important;
+    }
+
+    /* Video & Hero Container Adjustments */
     .hero, .hero-slider {
-        height: 60vh; /* Mobile par video height normal rahegi */
+        height: 75vh !important; /* Fits perfectly on mobile screens */
+        position: relative !important;
     }
 
-    .slide video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    .slide video, .hero video {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
     }
 
-    .hero-text h1, .hero-content h1 {
-        font-size: 24px; /* Mobile par headings choti aur readable hongi */
+    /* Glassmorphism Card (ROCK & ROLLS Text Box) */
+    .hero-overlay, .hero-text, .hero-content {
+        width: 88% !important;
+        padding: 15px 10px !important;
+        bottom: 20px !important;
+        margin: 0 auto !important;
     }
 
-    .hero-text p, .hero-content p {
-        font-size: 14px;
+    .hero-content h1, .hero-text h1 {
+        font-size: 20px !important;
+        margin-bottom: 5px !important;
     }
 
-    /* Menu Cards Grid Adjustment */
+    .hero-content p, .hero-text p {
+        font-size: 12px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .hero-content button, .hero-text a, .btn {
+        padding: 8px 16px !important;
+        font-size: 12px !important;
+    }
+
+    /* Menu Cards Grid - Compact & Clean Layout */
     .menu-container, .menu-grid, .categories {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        grid-template-columns: 1fr; /* Cards ek ke neechay ek aayenge */
-        padding: 10px;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        padding: 15px !important;
     }
 
     .menu-card, .food-item {
-        width: 90%;
-        margin-bottom: 15px;
+        width: 100% !important;
+        margin: 0 auto !important;
     }
+}      
 
-    /* Lightbox Modal Adjustment */
-    .modal-content, .lightbox-img {
-        width: 95%;
-        height: auto;
-    }
-}
+  
+
+
+   
     </style>
 </head>
 <body>
