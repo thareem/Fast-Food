@@ -435,6 +435,61 @@
             border-top: 1px solid var(--border-color);
             color: var(--text-muted);
         }
+        /* Mobile Responsiveness Code */
+@media screen and maximum-width: 768px {
+    
+    /* Navigation Bar Adjustments */
+    header, navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 0;
+    }
+
+    /* Hero Section & Video Adjustment */
+    .hero, .hero-slider {
+        height: 60vh; /* Mobile par video height normal rahegi */
+    }
+
+    .slide video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .hero-text h1, .hero-content h1 {
+        font-size: 24px; /* Mobile par headings choti aur readable hongi */
+    }
+
+    .hero-text p, .hero-content p {
+        font-size: 14px;
+    }
+
+    /* Menu Cards Grid Adjustment */
+    .menu-container, .menu-grid, .categories {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        grid-template-columns: 1fr; /* Cards ek ke neechay ek aayenge */
+        padding: 10px;
+    }
+
+    .menu-card, .food-item {
+        width: 90%;
+        margin-bottom: 15px;
+    }
+
+    /* Lightbox Modal Adjustment */
+    .modal-content, .lightbox-img {
+        width: 95%;
+        height: auto;
+    }
+}
     </style>
 </head>
 <body>
