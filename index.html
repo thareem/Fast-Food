@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock & Rolls - Happiness In Every Bite</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- Black & Mustard Theme Variables --- */
+        :root {
+            --bg-dark: #0d0d0d;
+            --card-bg: #161616;
+            --mustard: #ffb703;
+            --mustard-hover: #e0a100;
+            --text-light: #f8f9fa;
+            --text-muted: #aaaaaa;
+            --border-color: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* --- Navigation Bar --- */
+        navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 2px solid var(--mustard);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: var(--mustard);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--mustard);
+        }
+
+        .btn-mustard {
+            background: var(--mustard);
+            color: #000;
+            padding: 10px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.3);
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-mustard:hover {
+            background: var(--mustard-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 183, 3, 0.5);
+        }
+
+        /* --- Hero Video Slider --- */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 70px);
+            margin-top: 70px;
+            overflow: hidden;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Full View Video (Without Cropping Pictures) */
+        .slide video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            background: #000;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 600px;
+            background: rgba(13, 13, 13, 0.75);
+            padding: 20px 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 183, 3, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hero-overlay h1 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+            margin-bottom: 5px;
+        }
+
+        .hero-overlay p {
+            font-size: 18px;
+            color: var(--mustard);
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        /* --- Section Titles --- */
+        .section-title {
+            text-align: center;
+            margin: 70px 0 35px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: var(--mustard);
+            bottom: -8px;
+            left: 20%;
+            border-radius: 2px;
+        }
+
+        /* --- Special Highlighted Items --- */
+        .specials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 0 8%;
+        }
+
+        .special-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--mustard);
+            position: relative;
+            transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(255, 183, 3, 0.15);
+        }
+
+        .special-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(255, 183, 3, 0.35);
+        }
+
+        .badge-special {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--mustard);
+            color: #000;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 800;
+            border-radius: 20px;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        .special-card img, .menu-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            background-color: #000;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .special-card img:hover, .menu-card img:hover {
+            transform: scale(1.03);
+        }
+
+        .special-card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .special-card-body h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        /* --- Category Titles --- */
+        .category-title {
+            font-size: 26px;
+            color: var(--mustard);
+            margin: 40px 8% 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        /* --- General Menu Grid --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 8%;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--mustard);
+        }
+
+        .menu-card-info {
+            padding: 15px;
+        }
+
+        .menu-card-info h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .price {
+            color: var(--mustard);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .add-btn {
+            background: var(--mustard);
+            border: none;
+            color: #000;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .add-btn:hover {
+            background: var(--mustard-hover);
+        }
+
+        /* --- Image Popup Modal (Lightbox) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            text-align: center;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+            border: 2px solid var(--mustard);
+            box-shadow: 0 0 30px rgba(255, 183, 3, 0.4);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--mustard);
+        }
+
+        /* --- Delivery & Order Section --- */
+        .delivery-section {
+            background: linear-gradient(rgba(13,13,13,0.92), rgba(13,13,13,0.92)), url('images/menu card.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 8%;
+            margin-top: 80px;
+            text-align: center;
+            border-radius: 20px;
+            border: 1px solid var(--mustard);
+            margin-left: 8%;
+            margin-right: 8%;
+        }
+
+        .delivery-box {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .delivery-box i {
+            font-size: 55px;
+            color: var(--mustard);
+            margin-bottom: 15px;
+        }
+
+        /* --- Reviews Section --- */
+        .reviews-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0 8%;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--mustard);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stars {
+            color: var(--mustard);
+            margin-bottom: 10px;
+        }
+
+        .review-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .client-name {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #050505;
+            text-align: center;
+            padding: 30px;
+            margin-top: 80px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <navbar>
+        <div class="logo-text">Rock <span>&</span> Rolls</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#specials">⭐ Specials</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#delivery">Delivery</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+        </ul>
+        <a href="https://wa.me/?text=Hi%20Rock%20%26%20Rolls,%20I%20want%20to%20place%20an%20order!" target="_blank" class="btn-mustard"><i class="fa-brands fa-whatsapp"></i> Order Now</a>
+    </navbar>
+
+    <!-- Video Hero Slider -->
+    <div class="hero-slider" id="home">
+        <div class="slide active">
+            <video src="images/beef-burger.mp4" autoplay muted playsinline></video>
+        </div>
+        <div class="slide">
+            <video src="images/wrap.mp4" autoplay muted playsinline></video>
+        </div>
+        <div class="slide">
+            <video src="images/shawarma.mp4" autoplay muted playsinline></video>
+        </div>
+        <div class="slide">
+            <video src="images/zinger-burger.mp4" autoplay muted playsinline></video>
+        </div>
+        <div class="slide">
+            <video src="images/nuggets.mp4" autoplay muted playsinline></video>
+        </div>
+        <div class="slide">
+            <video src="images/fries.mp4" autoplay muted playsinline></video>
+        </div>
+        <div class="slide">
+            <video src="images/coke.mp4" autoplay muted playsinline></video>
+        </div>
+
+        <div class="hero-overlay">
+            <h1>ROCK & ROLLS</h1>
+            <p>HAPPINESS IN EVERY BITE</p>
+            <a href="#specials" class="btn-mustard" style="padding: 10px 25px; font-size: 16px;">Explore Our Menu</a>
+        </div>
+    </div>
+
+    <!-- ⭐ Special Highlighted Items -->
+    <div class="section-title" id="specials">
+        <h2>⭐ Our Special Menu</h2>
+    </div>
+
+    <div class="specials-container">
+        <div class="special-card">
+            <span class="badge-special">Must Try</span>
+            <img src="images/sp-burger.jpg" alt="Special Burger" onclick="openModal(this.src)">
+            <div class="special-card-body">
+                <h3>Rock Special Burger</h3>
+                <a href="https://wa.me/?text=I%20want%20to%20order%20Rock%20Special%20Burger" class="btn-mustard">Order Now</a>
+            </div>
+        </div>
+
+        <div class="special-card">
+            <span class="badge-special">Bestseller</span>
+            <img src="images/smash-beef-burger.jpg" alt="Smash Beef Burger" onclick="openModal(this.src)">
+            <div class="special-card-body">
+                <h3>Smash Beef Burger</h3>
+                <a href="https://wa.me/?text=I%20want%20to%20order%20Smash%20Beef%20Burger" class="btn-mustard">Order Now</a>
+            </div>
+        </div>
+
+        <div class="special-card">
+            <span class="badge-special">Hot Seller</span>
+            <img src="images/Shawarma-Platter.jpg" alt="Shawarma Platter" onclick="openModal(this.src)">
+            <div class="special-card-body">
+                <h3>Shawarma Platter</h3>
+                <a href="https://wa.me/?text=I%20want%20to%20order%20Shawarma%20Platter" class="btn-mustard">Order Now</a>
+            </div>
+        </div>
+
+        <div class="special-card">
+            <span class="badge-special">Chef's Choice</span>
+            <img src="images/Crispy-Chicken-wrap.jpg" alt="Crispy Chicken Wrap" onclick="openModal(this.src)">
+            <div class="special-card-body">
+                <h3>Crispy Chicken Wrap</h3>
+                <a href="https://wa.me/?text=I%20want%20to%20order%20Crispy%20Chicken%20Wrap" class="btn-mustard">Order Now</a>
+            </div>
+        </div>
+
+        <div class="special-card">
+            <span class="badge-special">Spicy Special</span>
+            <img src="images/wehshi-wrap.jpg" alt="Wehshi Wrap" onclick="openModal(this.src)">
+            <div class="special-card-body">
+                <h3>Wehshi Wrap</h3>
+                <a href="https://wa.me/?text=I%20want%20to%20order%20Wehshi%20Wrap" class="btn-mustard">Order Now</a>
+            </div>
+        </div>
+
+        <div class="special-card">
+            <span class="badge-special">Family Pack</span>
+            <img src="images/special-platter.jpg" alt="Special Platter" onclick="openModal(this.src)">
+            <div class="special-card-body">
+                <h3>Rock Special Platter</h3>
+                <a href="https://wa.me/?text=I%20want%20to%20order%20Rock%20Special%20Platter" class="btn-mustard">Order Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Complete Menu Section -->
+    <div class="section-title" id="menu">
+        <h2>Explore Full Menu</h2>
+    </div>
+
+    <!-- Category 1: Burgers -->
+    <h3 class="category-title">🍔 Burgers</h3>
+    <div class="menu-grid">
+        <div class="menu-card">
+            <img src="images/zinger-burger.jpg" alt="Zinger Burger" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Zinger Burger</h4>
+                <div class="price-row">
+                    <span class="price">Crispy Chicken</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Zinger%20Burger" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/sp-tower-burger.jpg" alt="Tower Burger" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Special Tower Burger</h4>
+                <div class="price-row">
+                    <span class="price">Double Patty</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Tower%20Burger" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/zinger-tower-burger.jpg" alt="Zinger Tower Burger" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Zinger Tower Burger</h4>
+                <div class="price-row">
+                    <span class="price">Loaded Zinger</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Zinger%20Tower%20Burger" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/Chapli-burger.jpg" alt="Chapli Burger" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Chapli Burger</h4>
+                <div class="price-row">
+                    <span class="price">Traditional Spice</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Chapli%20Burger" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/patty-burger.jpg" alt="Patty Burger" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Patty Burger</h4>
+                <div class="price-row">
+                    <span class="price">Classic Burger</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Patty%20Burger" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/Smashed-beef-Burger.jpg" alt="Smashed Beef Burger" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Smashed Beef Burger</h4>
+                <div class="price-row">
+                    <span class="price">Juicy Beef</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Smashed%20Beef%20Burger" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 2: Shawarmas & Wraps -->
+    <h3 class="category-title">🌯 Shawarmas & Wraps</h3>
+    <div class="menu-grid">
+        <div class="menu-card">
+            <img src="images/arabic-shawarma.jpg" alt="Arabic Shawarma" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Arabic Shawarma</h4>
+                <div class="price-row">
+                    <span class="price">Authentic Taste</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Arabic%20Shawarma" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/chicken-shawarma.jpg" alt="Chicken Shawarma" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Chicken Shawarma</h4>
+                <div class="price-row">
+                    <span class="price">Classic Shawarma</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Chicken%20Shawarma" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/Zinger-shawarma.jpg" alt="Zinger Shawarma" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Zinger Shawarma</h4>
+                <div class="price-row">
+                    <span class="price">Crispy Zinger</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Zinger%20Shawarma" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/zaitoon-shawarma.jpg" alt="Zaitoon Shawarma" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Zaitoon Shawarma</h4>
+                <div class="price-row">
+                    <span class="price">Olive Loaded</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Zaitoon%20Shawarma" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/arabic-wrap.jpg" alt="Arabic Wrap" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Arabic Wrap</h4>
+                <div class="price-row">
+                    <span class="price">Special Sauce</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Arabic%20Wrap" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/Chicken-Wrap.jpg" alt="Chicken Wrap" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Chicken Wrap</h4>
+                <div class="price-row">
+                    <span class="price">Grilled Chicken</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Chicken%20Wrap" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/hot & spicy-wrap.jpg" alt="Hot & Spicy Wrap" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Hot & Spicy Wrap</h4>
+                <div class="price-row">
+                    <span class="price">Extra Spicy</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Hot%20Spicy%20Wrap" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/thousand-saucy-wrap.jpg" alt="Thousand Saucy Wrap" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Thousand Saucy Wrap</h4>
+                <div class="price-row">
+                    <span class="price">Saucy Flavor</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Thousand%20Saucy%20Wrap" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/zinger-wrap.jpg" alt="Zinger Wrap" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Zinger Wrap</h4>
+                <div class="price-row">
+                    <span class="price">Crispy Bites</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Zinger%20Wrap" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 3: Parathas -->
+    <h3 class="category-title">🫓 Parathas</h3>
+    <div class="menu-grid">
+        <div class="menu-card">
+            <img src="images/Cheesy-Chicken-paratha.jpg" alt="Cheesy Chicken Paratha" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Cheesy Chicken Paratha</h4>
+                <div class="price-row">
+                    <span class="price">Melted Cheese</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Cheesy%20Chicken%20Paratha" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/Chicken-Paratha.jpg" alt="Chicken Paratha" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Chicken Paratha Roll</h4>
+                <div class="price-row">
+                    <span class="price">Juicy Chicken</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Chicken%20Paratha" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/kabab-paratha.jpg" alt="Kabab Paratha" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Kabab Paratha Roll</h4>
+                <div class="price-row">
+                    <span class="price">Seekh Kabab</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Kabab%20Paratha" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/Pizza Paratha.jpg" alt="Pizza Paratha" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Pizza Paratha</h4>
+                <div class="price-row">
+                    <span class="price">Cheesy Pizza Flavor</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Pizza%20Paratha" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/zinger-paratha.jpg" alt="Zinger Paratha" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Zinger Paratha Roll</h4>
+                <div class="price-row">
+                    <span class="price">Crispy Zinger</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Zinger%20Paratha" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category 4: Sides, Fries & Drinks -->
+    <h3 class="category-title">🍟 Fries, Sides & Drinks</h3>
+    <div class="menu-grid">
+        <div class="menu-card">
+            <img src="images/regular-fries.jpg" alt="Regular Fries" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Regular Fries</h4>
+                <div class="price-row">
+                    <span class="price">Crispy Hot</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Regular%20Fries" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/medium-fries.jpg" alt="Medium Fries" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Medium Fries</h4>
+                <div class="price-row">
+                    <span class="price">Standard Portion</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Medium%20Fries" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/family-fries.jpg" alt="Family Fries" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Family Pack Fries</h4>
+                <div class="price-row">
+                    <span class="price">Large Portion</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Family%20Fries" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/mayo-fries.jpg" alt="Mayo Fries" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Mayo Garlic Fries</h4>
+                <div class="price-row">
+                    <span class="price">Saucy Loaded</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Mayo%20Fries" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/nuggets.jpg" alt="Nuggets" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Chicken Nuggets</h4>
+                <div class="price-row">
+                    <span class="price">Golden Crispy</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Nuggets" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/wings.jpg" alt="Wings" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Crispy Chicken Wings</h4>
+                <div class="price-row">
+                    <span class="price">Spicy Wings</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Wings" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/1-liter-Coca-Cola.jpg" alt="1 Liter Coca Cola" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Coca Cola 1-Liter</h4>
+                <div class="price-row">
+                    <span class="price">Chilled Bottle</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%201L%20Coca%20Cola" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/regular-drink.jpg" alt="Cold Drink Can" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Cold Drink Can</h4>
+                <div class="price-row">
+                    <span class="price">Ice Cold</span>
+                    <a href="https://wa.me/?text=I%20want%20to%20order%20Cold%20Drink%20Can" class="add-btn">Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <img src="images/menu card.jpg" alt="Menu Card" onclick="openModal(this.src)">
+            <div class="menu-card-info">
+                <h4>Complete Menu Card</h4>
+                <div class="price-row">
+                    <span class="price">Full View</span>
+                    <a href="images/menu card.jpg" target="_blank" class="add-btn">View Card</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal (Popup) -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="imgFull">
+    </div>
+
+    <!-- Home Delivery Section -->
+    <div class="delivery-section" id="delivery">
+        <div class="delivery-box">
+            <i class="fa-solid fa-motorcycle"></i>
+            <h2>Fastest Home Delivery</h2>
+            <p style="margin: 15px 0 25px; color: var(--text-muted);">Hungry? Get fresh, piping hot burgers, wraps, and shawarmas delivered straight to your doorstep within minutes!</p>
+            <a href="https://wa.me/?text=Hello%20Rock%20%26%20Rolls,%20I%20want%20home%20delivery!" class="btn-mustard" style="font-size: 18px; padding: 12px 30px;"><i class="fa-brands fa-whatsapp"></i> Order via WhatsApp</a>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="section-title" id="reviews">
+        <h2>What Our Customers Say</h2>
+    </div>
+
+    <div class="reviews-container">
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Rock Special Burger was super juicy and full of flavour! Loved every bite."</p>
+            <div class="client-name">- Ali Raza</div>
+        </div>
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"The Wehshi Wrap is unmatched! Fast delivery and great quality."</p>
+            <div class="client-name">- Usman Khan</div>
+        </div>
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Shawarma Platter is very generous in quantity and tastes amazing."</p>
+            <div class="client-name">- Sara Ahmed</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 <strong style="color: var(--mustard);">Rock & Rolls</strong> - Happiness In Every Bite. All rights reserved.</p>
+    </footer>
+
+    <!-- Video Slider & Modal Scripts -->
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            playSlide(currentSlide);
+        }
+
+        function playSlide(index) {
+            slides.forEach((slide) => {
+                slide.classList.remove('active');
+                const video = slide.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+
+            slides[index].classList.add('active');
+            const activeVideo = slides[index].querySelector('video');
+
+            if (activeVideo) {
+                const playPromise = activeVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Video load delay, skipping to next:", error);
+                        setTimeout(nextSlide, 3000);
+                    });
+                }
+            } else {
+                setTimeout(nextSlide, 3000);
+            }
+        }
+
+        // Event listener: Jab video khatam hogi to auto next pe jaye gi (Infinite Loop)
+        slides.forEach((slide) => {
+            const video = slide.querySelector('video');
+            if (video) {
+                video.addEventListener('ended', nextSlide);
+                video.addEventListener('error', () => {
+                    console.log("Video error, skipping...");
+                    nextSlide();
+                });
+            }
+        });
+
+        // Start slider
+        playSlide(0);
+
+        // Image Full-screen Modal Functions
+        function openModal(src) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("imgFull");
+            modal.style.display = "block";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
